@@ -46,8 +46,6 @@ services:
       - ./keycloak/health-check.sh:/opt/keycloak/health-check.sh
     environment:
       KC_HTTP_PORT: 9080
-      KEYCLOAK_ADMIN: admin@example.com
-      KEYCLOAK_ADMIN_PASSWORD: password
       KC_BOOTSTRAP_ADMIN_USERNAME: admin@example.com
       KC_BOOTSTRAP_ADMIN_PASSWORD: password
       KC_HEALTH_ENABLED: true
