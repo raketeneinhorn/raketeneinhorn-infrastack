@@ -18,6 +18,9 @@ services:
     hostname: oauth2-proxy
     volumes:
       - "./oauth2-proxy/config/oauth2-proxy.cfg:/oauth2-proxy.cfg"
+    environment:
+      OAUTH2_PROXY_SKIP_AUTH_ROUTES: "GET=^/actuator.*${INFRASTACK_OAUTH2_PROXY_SKIP_AUTH_ROUTES_ADD:+,}${INFRASTACK_OAUTH2_PROXY_SKIP_AUTH_ROUTES_ADD-}"
+      OAUTH2_PROXY_API_ROUTES: ${INFRASTACK_OAUTH2_PROXY_API_ROUTES-^/.*}
     restart: unless-stopped
     ports:
       - 4180:4180/tcp
@@ -32,7 +35,7 @@ services:
 
   keycloak:
     container_name: keycloak
-    image: keycloak/keycloak:25.0
+    image: keycloak/keycloak:26.1
     hostname: keycloak
     command:
       - 'start-dev'
